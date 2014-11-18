@@ -133,6 +133,10 @@ class SMWExportController {
 			return; // do not export twice
 		}
 
+		// workaround for #619, skip all redirect pages
+		if ( $diWikiPage->getTitle() != null && $diWikiPage->getTitle()->isRedirect() )
+			return;
+
 		$this->markPageAsDone( $diWikiPage, $recursiondepth );
 		$semData = $this->getSemanticData( $diWikiPage, ( $recursiondepth == 0 ) );
 
