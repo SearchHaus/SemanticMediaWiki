@@ -130,6 +130,8 @@ class SMWExportController {
 		$this->serializer->serializeExpData( $expData, $recursiondepth );
 
 		foreach( $semData->getSubSemanticData() as $subobjectSemData ) {
+			if (0 === strpos($subobjectSemData->getSubject()->getSubobjectName(), "_QUERY"))
+				continue;
 			$this->serializer->serializeExpData( SMWExporter::makeExportData( $subobjectSemData ) );
 		}
 
